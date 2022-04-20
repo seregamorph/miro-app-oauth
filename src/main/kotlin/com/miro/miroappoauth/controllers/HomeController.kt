@@ -99,13 +99,17 @@ class HomeController(
             .replacePath(ENDPOINT_INSTALL)
             .query(null)
             .build().toUri()
-        val webPlugin = UriComponentsBuilder.fromHttpRequest(request)
+        val webPluginV1 = UriComponentsBuilder.fromHttpRequest(request)
             .replacePath("/webapp-sdk1/index.html").apply {
                 query(null)
                 if (appProperties.appName != null) {
                     queryParam("appName", appProperties.appName)
                 }
             }
+            .build().toUri()
+        // todo subpath of /webapp-sdk2
+        val webPluginV2 = UriComponentsBuilder.fromHttpRequest(request)
+            .replacePath("/index.html").apply { query(null) }
             .build().toUri()
 
         val referer = servletRequest.getHeader(HttpHeaders.REFERER)
@@ -116,7 +120,8 @@ class HomeController(
         model.addAttribute("miroBaseUrl", appProperties.miroBaseUrl)
         model.addAttribute("clientId", appProperties.clientId)
         model.addAttribute("redirectUri", redirectUri)
-        model.addAttribute("webPlugin", webPlugin)
+        model.addAttribute("webPluginV1", webPluginV1)
+        model.addAttribute("webPluginV2", webPluginV2)
         model.addAttribute("authorizeUrl", getAuthorizeUrl(redirectUri))
         model.addAttribute("installationManagementUrl", getInstallationManagementUrl(appProperties.teamId))
         model.addAttribute("referer", if (referer != servletRequest.requestURL.toString()) referer else null)

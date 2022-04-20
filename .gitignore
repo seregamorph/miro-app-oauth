@@ -37,9 +37,14 @@ build/
 src/main/webapp-sdk1/dist
 src/main/webapp-sdk1/node
 src/main/webapp-sdk1/node_modules
+
+src/main/webapp-sdk2/dist
+src/main/webapp-sdk2/node
+src/main/webapp-sdk2/node_modules
+
 package-lock.json
 
-application-local.*
+application-local*.*
 
 # h2 databases
 *.mv.db
