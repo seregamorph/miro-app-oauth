@@ -22,6 +22,7 @@
         <npm.version>8.7.0</npm.version>
         <bootstrap.version>4.2.1</bootstrap.version>
         <spring-framework.version>5.3.18</spring-framework.version>
+        <kotlin.version>1.6.21</kotlin.version>
 
         <webapp-sdk1.dir>src/main/webapp-sdk1</webapp-sdk1.dir>
     </properties>
