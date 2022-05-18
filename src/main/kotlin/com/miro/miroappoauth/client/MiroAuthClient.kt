@@ -1,6 +1,9 @@
 package com.miro.miroappoauth.client
 
 import com.miro.miroappoauth.dto.AccessTokenDto
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpMethod.POST
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.web.client.RestTemplate
 
@@ -23,7 +26,12 @@ class MiroAuthClient(
         form.add("code", code)
         form.add("redirect_uri", redirectUri)
 
-        return rest.postForObject("/v1/oauth/token", form, AccessTokenDto::class.java)!!
+        val headers = HttpHeaders().apply {
+            //set(HttpHeaders.HOST, "api.miro.com")
+        }
+        val request = HttpEntity<Any>(form, headers)
+
+        return rest.exchange("/v1/oauth/token", POST, request, AccessTokenDto::class.java).body!!
     }
 
     fun refreshToken(refreshToken: String, clientId: Long, clientSecret: String): AccessTokenDto {

@@ -17,7 +17,10 @@ class MiroPublicClient(
 ) {
 
     fun getSelfUser(accessToken: String): UserDto {
-        val headers = HttpHeaders().apply { setBearerAuth(accessToken) }
+        val headers = HttpHeaders().apply {
+            //set(HttpHeaders.HOST, "api.miro.com")
+            setBearerAuth(accessToken)
+        }
         val request = HttpEntity<Any>(null, headers)
 
         return rest.exchange("/v1/users/me", GET, request, UserDto::class.java).body!!
