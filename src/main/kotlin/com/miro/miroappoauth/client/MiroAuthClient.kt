@@ -19,19 +19,37 @@ class MiroAuthClient(
      * See [Miro REST API Authorization](https://developers.miro.com/reference#oauth-20-authorization-v2).
      */
     fun getAccessToken(code: String, redirectUri: String, clientId: Long, clientSecret: String): AccessTokenDto {
-        val form = LinkedMultiValueMap<String, String>()
-        form.add("grant_type", "authorization_code")
-        form.add("client_id", clientId.toString())
-        form.add("client_secret", clientSecret)
-        form.add("code", code)
-        form.add("redirect_uri", redirectUri)
+        if (false) {
+            val form = LinkedMultiValueMap<String, String>()
+            form.add("grant_type", "authorization_code")
+            form.add("client_id", clientId.toString())
+            form.add("client_secret", clientSecret)
+            form.add("code", code)
+            form.add("redirect_uri", redirectUri)
 
-        val headers = HttpHeaders().apply {
-            //set(HttpHeaders.HOST, "api.miro.com")
+            val headers = HttpHeaders().apply {
+                //set(HttpHeaders.HOST, "api.miro.com")
+            }
+
+            val request = HttpEntity<Any>(form, headers)
+
+            return rest.exchange("/v1/oauth/token", POST, request, AccessTokenDto::class.java).body!!
+        } else {
+            val headers = HttpHeaders().apply {
+                //set(HttpHeaders.HOST, "api.miro.com")
+            }
+
+            val request = HttpEntity<Any>(null, headers)
+
+            return rest.exchange("/v1/oauth/token" +
+                    "?grant_type=authorization_code" +
+                    "&client_id={client_id}" +
+                    "&client_secret={client_secret}" +
+                    "&code={code}" +
+                    "&redirect_uri={redirect_uri}",
+                POST, request, AccessTokenDto::class.java,
+            clientId, clientSecret, code, redirectUri).body!!
         }
-        val request = HttpEntity<Any>(form, headers)
-
-        return rest.exchange("/v1/oauth/token", POST, request, AccessTokenDto::class.java).body!!
     }
 
     fun refreshToken(refreshToken: String, clientId: Long, clientSecret: String): AccessTokenDto {
