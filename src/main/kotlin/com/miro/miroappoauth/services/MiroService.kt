@@ -61,7 +61,7 @@ class MiroService(
     }
 
     fun getSelfUser(token: Token): UserDto {
-        return doRequest(token) { accessToken -> miroPublicClient.getSelfUser(accessToken) }
+        return doRequest(token) { accessToken -> miroPublicClient.getSelfUserV2(accessToken, token.accessToken.userId) }
     }
 
     fun createBoard(
