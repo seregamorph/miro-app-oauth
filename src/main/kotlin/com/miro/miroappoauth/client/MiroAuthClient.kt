@@ -19,7 +19,7 @@ class MiroAuthClient(
      * See [Miro REST API Authorization](https://developers.miro.com/reference#oauth-20-authorization-v2).
      */
     fun getAccessToken(code: String, redirectUri: String, clientId: Long, clientSecret: String): AccessTokenDto {
-        if (false) {
+        if (true) {
             val form = LinkedMultiValueMap<String, String>()
             form.add("grant_type", "authorization_code")
             form.add("client_id", clientId.toString())
