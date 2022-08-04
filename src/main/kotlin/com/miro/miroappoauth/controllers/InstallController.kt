@@ -3,12 +3,12 @@ package com.miro.miroappoauth.controllers
 import com.miro.miroappoauth.config.AppProperties
 import com.miro.miroappoauth.services.TokenService
 import com.miro.miroappoauth.utils.getCurrentRequest
+import jakarta.servlet.http.HttpSession
 import org.springframework.http.server.ServletServerHttpRequest
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.util.UriComponentsBuilder
-import javax.servlet.http.HttpSession
 
 /**
  * Serves install action.

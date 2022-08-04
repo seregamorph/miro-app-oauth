@@ -6,6 +6,7 @@ import com.miro.miroappoauth.model.TokenRecord
 import com.miro.miroappoauth.model.TokenState.INVALID
 import com.miro.miroappoauth.services.TokenService
 import com.miro.miroappoauth.utils.getCurrentRequest
+import jakarta.servlet.http.HttpSession
 import org.springframework.http.HttpHeaders
 import org.springframework.http.server.ServletServerHttpRequest
 import org.springframework.stereotype.Controller
@@ -18,7 +19,6 @@ import java.net.URI
 import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.util.Collections.emptyList
-import javax.servlet.http.HttpSession
 
 /**
  * Main page with listing tokens and installation.

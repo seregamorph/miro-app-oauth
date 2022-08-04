@@ -3,10 +3,7 @@ package com.miro.miroappoauth.client;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
@@ -44,7 +41,7 @@ public class LoggingInterceptor implements ClientHttpRequestInterceptor {
         Throwable exception = null;
         try {
             response = execution.execute(request, requestBody);
-            HttpStatus httpStatus = response.getStatusCode();
+            HttpStatusCode httpStatus = response.getStatusCode();
             responseBody = StreamUtils.copyToByteArray(response.getBody());
             return getClientHttpResponse(httpStatus, response, responseBody);
         } catch (IOException | RuntimeException | Error e) {
@@ -89,7 +86,8 @@ public class LoggingInterceptor implements ClientHttpRequestInterceptor {
         PrintStringWriter out = new PrintStringWriter();
 
         out.println("Response");
-        out.println("HTTP " + response.getStatusCode().value() + " " + response.getStatusCode().getReasonPhrase());
+        out.println("HTTP " + response.getStatusCode().value() + " "
+                + HttpStatus.valueOf(response.getStatusCode().value()).getReasonPhrase());
         printHeaders(out, response.getHeaders());
         String content = getContent(response.getHeaders(), responseBody);
         out.println();
@@ -100,11 +98,13 @@ public class LoggingInterceptor implements ClientHttpRequestInterceptor {
         return out.toString();
     }
 
-    private static ClientHttpResponse getClientHttpResponse(HttpStatus httpStatus, ClientHttpResponse response,
-                                                            byte[] responseBody) {
+    private static ClientHttpResponse getClientHttpResponse(
+            HttpStatusCode httpStatus, ClientHttpResponse response,
+            byte[] responseBody
+    ) {
         return new ClientHttpResponse() {
             @Override
-            public HttpStatus getStatusCode() {
+            public HttpStatusCode getStatusCode() {
                 return httpStatus;
             }
 
