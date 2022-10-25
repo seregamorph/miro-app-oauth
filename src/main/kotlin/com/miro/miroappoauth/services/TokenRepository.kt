@@ -5,11 +5,13 @@ import com.miro.miroappoauth.dto.AccessTokenDto
 import com.miro.miroappoauth.model.Token
 import com.miro.miroappoauth.model.TokenState
 import org.springframework.jdbc.core.JdbcTemplate
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Repository
+import org.springframework.transaction.annotation.Transactional
 import java.sql.ResultSet
 
-@Service
-class TokenStore(
+@Repository
+@Transactional
+class TokenRepository(
     private val objectMapper: ObjectMapper,
     private val jdbc: JdbcTemplate
 ) {

@@ -7,9 +7,7 @@ import com.miro.miroappoauth.dto.AccessTokenDto
 import com.miro.miroappoauth.dto.UserDto
 import com.miro.miroappoauth.model.Token
 import com.miro.miroappoauth.model.TokenState
-import com.miro.miroappoauth.model.TokenState.INVALID
-import com.miro.miroappoauth.model.TokenState.NEW
-import com.miro.miroappoauth.model.TokenState.VALID
+import com.miro.miroappoauth.model.TokenState.*
 import org.springframework.dao.DuplicateKeyException
 import org.springframework.stereotype.Service
 import org.springframework.web.client.HttpClientErrorException.Unauthorized
@@ -18,7 +16,7 @@ import java.time.Instant
 @Service
 class TokenService(
     private val appProperties: AppProperties,
-    private val tokenStore: TokenStore,
+    private val tokenRepository: TokenRepository,
     private val miroAuthClient: MiroAuthClient,
     private val miroPublicClient: MiroPublicClient
 ) {
@@ -40,7 +38,7 @@ class TokenService(
     }
 
     fun refreshToken(accessTokenValue: String): AccessTokenDto {
-        val token = tokenStore.getToken(accessTokenValue)
+        val token = tokenRepository.getToken(accessTokenValue)
             ?: throw IllegalStateException("Missing accessToken $accessTokenValue")
         val accessToken = token.accessToken
         try {
@@ -69,18 +67,18 @@ class TokenService(
     }
 
     fun getToken(userId: Long, clientId: Long, teamId: Long): Token? {
-        return tokenStore.getToken(userId, clientId, teamId)
+        return tokenRepository.getToken(userId, clientId, teamId)
     }
 
     fun getTokens(userId: Long, clientId: Long): List<Token> {
-        return tokenStore.getTokens(userId, clientId)
+        return tokenRepository.getTokens(userId, clientId)
     }
 
     fun updateToken(accessToken: String, state: TokenState) {
-        val token = tokenStore.getToken(accessToken) ?: throw IllegalStateException("Missing token $accessToken")
+        val token = tokenRepository.getToken(accessToken) ?: throw IllegalStateException("Missing token $accessToken")
         token.state = state
         token.lastAccessedTime = Instant.now()
-        tokenStore.update(token)
+        tokenRepository.update(token)
     }
 
     private fun storeToken(accessToken: AccessTokenDto, clientId: Long) {
@@ -89,9 +87,9 @@ class TokenService(
             createdTime = Instant.now(), lastAccessedTime = null
         )
         try {
-            tokenStore.insert(token)
+            tokenRepository.insert(token)
         } catch (e: DuplicateKeyException) {
-            tokenStore.update(token)
+            tokenRepository.update(token)
         }
     }
 }
