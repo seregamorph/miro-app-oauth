@@ -21,7 +21,7 @@
         <yarn.version>v1.22.18</yarn.version>
         <npm.version>8.7.0</npm.version>
         <bootstrap.version>4.2.1</bootstrap.version>
-        <kotlin.version>1.7.21</kotlin.version>
+        <kotlin.version>1.8.0-Beta</kotlin.version>
 
         <webapp-sdk1.dir>src/main/webapp-sdk1</webapp-sdk1.dir>
         <webapp-sdk2.dir>src/main/webapp-sdk2</webapp-sdk2.dir>
