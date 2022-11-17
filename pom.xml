@@ -193,7 +193,7 @@
                     </execution>
 
                     <execution>
-                        <id>sdk2 install node and npm</id>
+                        <id>sdk2 install node and yarn</id>
                         <goals>
                             <goal>install-node-and-yarn</goal>
                         </goals>
@@ -204,7 +204,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>sdk2 npm install</id>
+                        <id>sdk2 yarn install</id>
                         <goals>
                             <goal>yarn</goal>
                         </goals>
