@@ -10,12 +10,12 @@ import org.springframework.transaction.annotation.Transactional
 import java.sql.ResultSet
 
 @Repository
-@Transactional
 class TokenRepository(
     private val objectMapper: ObjectMapper,
     private val jdbc: JdbcTemplate
 ) {
 
+    @Transactional
     fun insert(token: Token) {
         jdbc.update(
             "INSERT INTO token(" +
@@ -33,6 +33,7 @@ class TokenRepository(
         )
     }
 
+    @Transactional
     fun update(token: Token) {
         jdbc.update(
             "UPDATE token SET " +
@@ -55,6 +56,7 @@ class TokenRepository(
         )
     }
 
+    @Transactional(readOnly = true)
     fun getToken(accessToken: String): Token? {
         return jdbc.query(
             "SELECT access_token, access_token_payload, client_id, state, created_time, last_accessed_time " +
@@ -63,6 +65,7 @@ class TokenRepository(
         ).firstOrNull()
     }
 
+    @Transactional(readOnly = true)
     fun getToken(userId: Long, clientId: Long, teamId: Long): Token? {
         return jdbc.query(
             "SELECT access_token, access_token_payload, client_id, state, created_time, last_accessed_time " +
@@ -73,6 +76,7 @@ class TokenRepository(
         ).firstOrNull()
     }
 
+    @Transactional(readOnly = true)
     fun getTokens(userId: Long, clientId: Long): List<Token> {
         return jdbc.query(
             "SELECT access_token, access_token_payload, client_id, state, created_time, last_accessed_time " +
