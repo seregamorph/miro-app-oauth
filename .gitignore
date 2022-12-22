@@ -49,3 +49,4 @@ application-local*.*
 # h2 databases
 *.mv.db
 *.trace.db
+/src/main/webapp-sdk2/tsconfig.tsbuildinfo

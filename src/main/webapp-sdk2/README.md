@@ -1,6 +1,7 @@
 # Create Miro App
 
 [create-miro-app](https://www.npmjs.com/package/create-miro-app)
+
 ```shell
 npx create-miro-app@beta
 ```
