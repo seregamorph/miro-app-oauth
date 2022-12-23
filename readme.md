@@ -2,7 +2,7 @@
 Simple application (both backend and frontend) to test Miro OAuth 2.0 installation.
 
 # Steps to run the application
-- Register your application following [instruction](https://developers.miro.com/docs/getting-started)
+- Register your application following [instruction](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app)
   with default settings
 - Once you have "Client ID", copy `application-local_template.yml` to `application-local.yml` and fill fields:
 `clientId`, `clientSecret` and optional `teamId`.

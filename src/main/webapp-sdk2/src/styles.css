@@ -1,18 +1,69 @@
+@import "mirotone/dist/styles.css";
+
+/* Extra variables */
+
+:root {
+  --background-primary: #eeeeee;
+}
+
+/* Reset browser defaults */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
 html {
   height: 100%;
-  background-color: #eee;
+  background-color: var(--background-primary);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol,
+    Noto Color Emoji;
 }
 
 body {
   height: 100%;
-  margin: 0;
-  padding: 2rem;
+  line-height: 1.5;
+  padding: 0 var(--space-medium) var(--space-medium) var(--space-medium);
+  max-width: 580px;
+  margin: 0 auto;
 }
 
-.centered {
+p {
+  margin: 0;
+}
+
+ul,
+li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Specific global classes */
+
+.sdkapp-text-centered {
+  text-align: center;
+}
+
+.sdkapp-output {
+  font-style: italic;
+}
+
+.sdkapp-output-danger {
+  color: var(--red700);
+}
+
+.sdkapp-output-info {
+  color: var(--indigo600);
+}
+
+.sdkapp-container {
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  overflow: scroll;
+}
+
+.sdkapp-space {
+  padding-top: var(--space-xsmall);
 }
