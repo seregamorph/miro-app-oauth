@@ -1,7 +1,7 @@
 /**
  * Start here
  */
-declare const miro: SDK.Root
+declare const miro: SDK.Root;
 
 /**
  * Here you will find a full reference to all publicly available methods in
@@ -30,7 +30,7 @@ declare namespace SDK {
      * }
      * ```
      */
-    onReady(callback: () => void): void
+    onReady(callback: () => void): void;
     /**
      * Accepts a configuration to initialize the plugin.
      *
@@ -45,7 +45,7 @@ declare namespace SDK {
      * }
      * ```
      */
-    initialize(config?: IPluginConfig): Promise<void>
+    initialize(config?: IPluginConfig): Promise<void>;
 
     /**
      * Accepts a configuration to initialize the plugin in the settings page.
@@ -61,7 +61,7 @@ declare namespace SDK {
      * ```
      *
      */
-    initializeSettings(config?: IPluginSettingsConfig): Promise<void>
+    initializeSettings(config?: IPluginSettingsConfig): Promise<void>;
 
     /**
      * The current board the user is watching.
@@ -70,7 +70,7 @@ declare namespace SDK {
      * Available only when the Web-plugin runs in a board
      *
      */
-    board: IBoardCommands
+    board: IBoardCommands;
 
     /**
      * Contains commands (functions) to access to the Account (Team)
@@ -78,18 +78,18 @@ declare namespace SDK {
      *
      * *Note*: this is not the current user
      */
-    account: IAccountCommands
+    account: IAccountCommands;
 
     /**
      * The current user.
      * Contains commands (functions) to access to the current user information.
      */
-    currentUser: ICurrentUserCommands
+    currentUser: ICurrentUserCommands;
 
     /**
      * Contains constants like events and style that can be used with other SDK methods
      */
-    enums: IEnums
+    enums: IEnums;
 
     /**
      * Subscribe to an event in the board.
@@ -109,7 +109,7 @@ declare namespace SDK {
      * ```
      * *Related: See [[removeListener]] to remove a listener*
      */
-    addListener(event: EventType, listener: (e: Event) => void): void
+    addListener(event: EventType, listener: (e: Event) => void): void;
 
     /**
      * Unsubscribe from an event in the board.
@@ -128,7 +128,7 @@ declare namespace SDK {
      * ```
      * *Related: See [[addListener]] to add a listener*
      */
-    removeListener(event: EventType, listener: (e: Event) => void): void
+    removeListener(event: EventType, listener: (e: Event) => void): void;
 
     /**
      * Broadcast some data to iframes from your plugin in [Container Entry Points](https://developers.miro.com/docs/extension-points-for-miro-apps)
@@ -146,7 +146,7 @@ declare namespace SDK {
      * })
      * ```
      */
-    broadcastData(data: any): void
+    broadcastData(data: any): void;
 
     /**
      * Shows a notification to the user
@@ -158,7 +158,7 @@ declare namespace SDK {
      * miro.showNotification('Hello world')
      * ```
      */
-    showNotification(text: string): Promise<void>
+    showNotification(text: string): Promise<void>;
 
     /**
      * Similar to [[showNotification]] with additional style to indicate error
@@ -169,7 +169,7 @@ declare namespace SDK {
      * miro.showErrorNotification('This is an error notification')
      * ```
      */
-    showErrorNotification(text: string): Promise<void>
+    showErrorNotification(text: string): Promise<void>;
 
     /**
      * Check if the current user has authorized the Web-plugin to make API requests
@@ -188,7 +188,7 @@ declare namespace SDK {
      * })
      * ```
      */
-    isAuthorized(): Promise<boolean>
+    isAuthorized(): Promise<boolean>;
 
     /**
      * **Deprecated**
@@ -196,7 +196,7 @@ declare namespace SDK {
      *
      * @deprecated
      */
-    getToken(): Promise<string>
+    getToken(): Promise<string>;
 
     /**
      * The `getIdToken()` method returns a [JSON Web Token (JWT)](http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-11), an encoded form of JSON data, signed by the application secret. You can use JWTs to authenticate requests from your Miro web-plugin to your backend services. You can use an existing [JWT library to decode](https://jwt.io/) the token and establish the communication between your Miro web-plugin and your backend services.
@@ -211,7 +211,7 @@ declare namespace SDK {
      * })
      * ```
      */
-    getIdToken(): Promise<string>
+    getIdToken(): Promise<string>;
 
     /**
      * **Deprecated**
@@ -219,7 +219,7 @@ declare namespace SDK {
      *
      * @deprecated
      */
-    authorize(options: AuthorizationOptions): Promise<string>
+    authorize(options: AuthorizationOptions): Promise<string>;
 
     /**
      * Opens a modal to follow the authorization process for your App.
@@ -228,14 +228,14 @@ declare namespace SDK {
      * @returns A promise fulfilled if the app has been authorized.
      *
      */
-    requestAuthorization(options?: AuthorizationOptions): Promise<void>
+    requestAuthorization(options?: AuthorizationOptions): Promise<void>;
 
     /**
      * Returns the clientId from the web plugin.
      * This is the same clientId from the App settings dashboard.
      * @returns The web plugin clientId.
      */
-    getClientId(): string
+    getClientId(): string;
 
     /**
      * Saves a state (any) that can will be accessible across all
@@ -250,7 +250,7 @@ declare namespace SDK {
      * @returns A promise resolving into the previously saved state. Defaults to an empty object.
      *
      */
-    __setRuntimeState<T = any>(data: T): Promise<T>
+    __setRuntimeState<T = any>(data: T): Promise<T>;
     /**
      * Gets a previously set state from any container extension point (iframe) from your plugin.
      *
@@ -262,7 +262,7 @@ declare namespace SDK {
      *
      * @returns A promise resolving into the stored state.
      */
-    __getRuntimeState<T = any>(): Promise<T>
+    __getRuntimeState<T = any>(): Promise<T>;
   }
 
   /**
@@ -281,18 +281,18 @@ declare namespace SDK {
    * @category General
    */
   type EventType =
-      | 'SELECTION_UPDATED'
-      | 'WIDGETS_CREATED'
-      | 'WIDGETS_DELETED'
-      | 'WIDGETS_TRANSFORMATION_UPDATED'
-      | 'ESC_PRESSED' //Experimental event
-      | 'ALL_WIDGETS_LOADED' //Experimental event
-      | 'COMMENT_CREATED' //Experimental event
-      | 'CANVAS_CLICKED' //Experimental event
-      | 'DATA_BROADCASTED' //Experimental event
-      | 'RUNTIME_STATE_UPDATED' //Experimental event
-      | 'METADATA_CHANGED' //Experimental event
-      | 'ONLINE_USERS_CHANGED' //Experimental event
+    | "SELECTION_UPDATED"
+    | "WIDGETS_CREATED"
+    | "WIDGETS_DELETED"
+    | "WIDGETS_TRANSFORMATION_UPDATED"
+    | "ESC_PRESSED" //Experimental event
+    | "ALL_WIDGETS_LOADED" //Experimental event
+    | "COMMENT_CREATED" //Experimental event
+    | "CANVAS_CLICKED" //Experimental event
+    | "DATA_BROADCASTED" //Experimental event
+    | "RUNTIME_STATE_UPDATED" //Experimental event
+    | "METADATA_CHANGED" //Experimental event
+    | "ONLINE_USERS_CHANGED"; //Experimental event
 
   /**
    * An Event generated by the main application.
@@ -304,11 +304,11 @@ declare namespace SDK {
     /**
      * The type of event as in [[EventIBoardCommentsCommandspe]]
      */
-    type: string | EventType
+    type: string | EventType;
     /**
      * Payload with data related to the event
      */
-    data: any
+    data: any;
   }
 
   /**
@@ -321,11 +321,11 @@ declare namespace SDK {
      * The url the user will be redirected after the authorization.
      * This url must be registered in your app "Redirect URLs" list.
      */
-    redirect_uri?: string
+    redirect_uri?: string;
     /**
      * oAuth state parameter. It will be send back to the defined `redirect_uri`.
      */
-    state?: string
+    state?: string;
   }
 
   /**
@@ -337,7 +337,7 @@ declare namespace SDK {
     /**
      * Height for your plugin iframe
      */
-    iframeHeight: number
+    iframeHeight: number;
   }
 
   /**
@@ -350,7 +350,7 @@ declare namespace SDK {
      * Configuration options
      * @inline
      */
-    extensionPoints: IPluginConfigExtensionPoints
+    extensionPoints: IPluginConfigExtensionPoints;
   }
 
   /**
@@ -393,7 +393,7 @@ declare namespace SDK {
      *
      * ```
      */
-    toolbar?: ButtonExtensionPoint<ToolbarButton>
+    toolbar?: ButtonExtensionPoint<ToolbarButton>;
     /**
      * The toolbar seen on the bottom left side of the board
      *
@@ -418,7 +418,7 @@ declare namespace SDK {
      * });
      * ```
      */
-    bottomBar?: ButtonExtensionPoint<BottomBarButton>
+    bottomBar?: ButtonExtensionPoint<BottomBarButton>;
     /**
      * The toolbar seen when the user opens the export menu.
      *
@@ -445,7 +445,7 @@ declare namespace SDK {
      * ```
      *
      */
-    exportMenu?: ButtonExtensionPoint<ExportMenuButton>
+    exportMenu?: ButtonExtensionPoint<ExportMenuButton>;
 
     /**
      *
@@ -454,13 +454,16 @@ declare namespace SDK {
      *
      * @deprecated
      */
-    getWidgetMenuItems?: (widgets: IWidget[], editMode: boolean) => Promise<IWidgetMenuItem | IWidgetMenuItem[]>
+    getWidgetMenuItems?: (
+      widgets: IWidget[],
+      editMode: boolean
+    ) => Promise<IWidgetMenuItem | IWidgetMenuItem[]>;
   }
 
   /**
    * @category Extension Points
    */
-  type ButtonExtensionPoint<T> = T | (() => Promise<T | void>)
+  type ButtonExtensionPoint<T> = T | (() => Promise<T | void>);
 
   /**
    * Defines a button in the toolbar extension point.
@@ -478,7 +481,7 @@ declare namespace SDK {
     /**
      * The title of the button, It will be displayed on mouse over.
      */
-    title: string
+    title: string;
     /**
      * The icon that will be displayed on the library (when clicking the dots `...` icon
      * in the toolbar).
@@ -488,16 +491,16 @@ declare namespace SDK {
      * The user must drag and drop you plugin icon from the library into the toolbar to display it directly in
      * the toolbar.
      */
-    librarySvgIcon: string
+    librarySvgIcon: string;
     /**
      * The icon that will be displayed in the toolbar after the user drag it from the library.
      * Must be an [SVG Element](https://developer.mozilla.org/en-US/docs/Web/SVG/Element)
      */
-    toolbarSvgIcon: string
+    toolbarSvgIcon: string;
     /**
      * A handler to be executed when the user clicks the button
      */
-    onClick: () => void
+    onClick: () => void;
   }
 
   /**
@@ -513,16 +516,16 @@ declare namespace SDK {
     /**
      * The title of the button, It will be displayed  on mouse over.
      */
-    title: string
+    title: string;
     /**
      * The icon that will be displayed.
      * Must be an [SVGElement](https://developer.mozilla.org/en-US/docs/Web/SVG/Element)
      */
-    svgIcon: string
+    svgIcon: string;
     /**
      * A handler to be executed when the user clicks the button
      */
-    onClick: () => void
+    onClick: () => void;
   }
 
   /**
@@ -541,16 +544,16 @@ declare namespace SDK {
      * See [[IPluginConfigExtensionPoints]] for examples.
      *
      */
-    title: string
+    title: string;
     /**
      * The icon that will be displayed.
      * Must be an [SVGElement](https://developer.mozilla.org/en-US/docs/Web/SVG/Element)
      */
-    svgIcon: string
+    svgIcon: string;
     /**
      * A handler to be executed when the user clicks the button
      */
-    onClick: () => void
+    onClick: () => void;
   }
 
   /**
@@ -559,9 +562,9 @@ declare namespace SDK {
    * @deprecated
    */
   interface IWidgetMenuItem {
-    tooltip: string
-    svgIcon: string
-    onClick: () => void
+    tooltip: string;
+    svgIcon: string;
+    onClick: () => void;
   }
 
   /**
@@ -575,50 +578,50 @@ declare namespace SDK {
     /**
      * Command related to the board information
      */
-    info: IBoardInfoCommands
+    info: IBoardInfoCommands;
     /**
      * Commands related to widgets like create, update, delete and metadata.
      */
-    widgets: IBoardWidgetsCommands
+    widgets: IBoardWidgetsCommands;
     /**
      * Commands related to tags
      */
-    tags: IBoardTagsCommands
+    tags: IBoardTagsCommands;
     /**
      * Commands related to the user interface control
      */
-    ui: IBoardUICommands
+    ui: IBoardUICommands;
     /**
      * Commands related to the board viewport
      */
-    viewport: IBoardViewportCommands
+    viewport: IBoardViewportCommands;
     /**
      * Commands related to the selection of widgets in the board
      */
-    selection: IBoardSelectionCommands
+    selection: IBoardSelectionCommands;
 
     /**
      * Utilities to work with the board
      */
-    utils: IBoardUtils
+    utils: IBoardUtils;
 
     /**
      * Returns the deserialized parameters contained in the `miro_sdk` address (location.href) query parameter.
      * @returns A promise resolving into the deserialized data in the `miro_sdk` query parameter.
      * @experimental
      */
-    __getParamsFromURL(): Promise<any>
+    __getParamsFromURL(): Promise<any>;
     /**
      * Enables the usage of the mouse left button on the board.
      * It has no effect if the left button was not previously disabled.
      * @experimental
      */
-    __enableLeftClickOnCanvas(): void
+    __enableLeftClickOnCanvas(): void;
     /**
      * Disable the usage of the mouse left button on the board.
      * @experimental
      */
-    __disableLeftClickOnCanvas(): void
+    __disableLeftClickOnCanvas(): void;
   }
 
   /**
@@ -633,12 +636,12 @@ declare namespace SDK {
      * Possible values: `horizontal` and `vertical`
      * Defaults to `horizontal`
      */
-    dragDirection?: string
+    dragDirection?: string;
 
     /**
      * A CSS selector. HTMLElement inside the container matching this selector will be draggable.
      */
-    draggableItemSelector: string
+    draggableItemSelector: string;
 
     /**
      * A callback executed when the user starts dragging.
@@ -647,34 +650,38 @@ declare namespace SDK {
       /**
        * defaults to 100
        */
-      width?: number
+      width?: number;
       /**
        * defaults to 100
        */
-      height?: number
+      height?: number;
       /**
        * An image following the cursor while the dragging takes place.
        * Supported schemas: 'https://', 'data:image/svg+xml', 'data:image/png;base64'
        */
-      url: string
-    }
+      url: string;
+    };
 
     /**
      * A callback executed when a draggable item is clicked.
      * This callback will be executed regardless of the item being dragged or not.
      */
-    onClick?: (targetElement: HTMLElement) => void
+    onClick?: (targetElement: HTMLElement) => void;
 
     /**
      * A callback executed when an item was dropped in the board canvas.
      * targetElement is the dragged and dropped item.
      */
-    onDrop: (canvasX: number, canvasY: number, targetElement: HTMLElement) => void
+    onDrop: (
+      canvasX: number,
+      canvasY: number,
+      targetElement: HTMLElement
+    ) => void;
 
     /**
      * A callback executed when an item was dragged but not dropped in the board canvas.
      */
-    onCancel?: () => void
+    onCancel?: () => void;
   }
 
   /**
@@ -691,7 +698,7 @@ declare namespace SDK {
      *
      * Requires scope: `TEAM:READ`
      */
-    get(): Promise<IAccountInfo>
+    get(): Promise<IAccountInfo>;
   }
 
   /**
@@ -704,18 +711,18 @@ declare namespace SDK {
      * @returns a promise resolving in the current user id
      *
      */
-    getId(): Promise<string>
+    getId(): Promise<string>;
     /**
      * Returns if the user is logged in.
      *
      * @returns a promise resolved into the login status of the current user (true or false)
      */
-    isSignedIn(): Promise<boolean>
+    isSignedIn(): Promise<boolean>;
     /**
      * Gets the current scopes the user has authorized the plugin
      * @returns a promise resolving into an array of scopes (strings) the user has authorized the plugin.
      */
-    getScopes(): Promise<string[]>
+    getScopes(): Promise<string[]>;
 
     /**
      * Gets the permissions of the current user over the current board.
@@ -724,7 +731,7 @@ declare namespace SDK {
      *
      * @returns a promise resolving into an array of [[BoardPermission]](strings)
      */
-    getCurrentBoardPermissions(): Promise<BoardPermission[]>
+    getCurrentBoardPermissions(): Promise<BoardPermission[]>;
 
     /**
      * Gets the permissions of the current user over the account (team).
@@ -733,7 +740,7 @@ declare namespace SDK {
      *
      * @returns a promise resolving into an array of [[AccountPermission]](strings)
      */
-    getCurrentAccountPermissions(): Promise<AccountPermission[]>
+    getCurrentAccountPermissions(): Promise<AccountPermission[]>;
 
     /**
      * Returns if the current user is a member of the account (team) owner of the board
@@ -743,19 +750,19 @@ declare namespace SDK {
      * @returns a promise resolving into the membership status of the current user (boolean)
      *
      */
-    isMemberOfCurrentAccount(): Promise<boolean>
+    isMemberOfCurrentAccount(): Promise<boolean>;
   }
 
   /**
    * Representation of one widget by id
    * @category Widgets Manipulation
    */
-  type InputWidget = string | {id: string}
+  type InputWidget = string | { id: string };
   /**
    * Representation of one or multiple widgets by id
    * @category Widgets Manipulation
    */
-  type InputWidgets = string | string[] | {id: string} | {id: string}[]
+  type InputWidgets = string | string[] | { id: string } | { id: string }[];
 
   /**
    * Commands to get information about the board
@@ -765,7 +772,7 @@ declare namespace SDK {
     /**
      * @returns a promise resolving into information ([[IBoardInfo]]) about the board
      */
-    get(): Promise<IBoardInfo>
+    get(): Promise<IBoardInfo>;
   }
 
   /**
@@ -816,7 +823,10 @@ declare namespace SDK {
      * });
      * ```
      */
-    openLeftSidebar(iframeURL: string, options?: {width?: number}): Promise<any>
+    openLeftSidebar(
+      iframeURL: string,
+      options?: { width?: number }
+    ): Promise<any>;
 
     /**
      * Opens the library extension point and loads an iframe with the `iframeURL`.
@@ -848,7 +858,7 @@ declare namespace SDK {
      * });
      * ```
      */
-    openLibrary(iframeURL: string, options: {title: string}): Promise<any>
+    openLibrary(iframeURL: string, options: { title: string }): Promise<any>;
 
     /**
      * Opens the modal extension point and loads an iframe with the `iframeURL`.
@@ -881,7 +891,10 @@ declare namespace SDK {
      * });
      * ```
      */
-    openModal(iframeURL: string, options?: {width?: number; height?: number} | {fullscreen: boolean}): Promise<any>
+    openModal(
+      iframeURL: string,
+      options?: { width?: number; height?: number } | { fullscreen: boolean }
+    ): Promise<any>;
 
     /**
      * Opens the bottom panel extension point and loads an iframe with the `iframeURL`.
@@ -921,7 +934,10 @@ declare namespace SDK {
      * ```
      *
      */
-    openBottomPanel(iframeURL: string, options?: {width?: number; height?: number}): Promise<any>
+    openBottomPanel(
+      iframeURL: string,
+      options?: { width?: number; height?: number }
+    ): Promise<any>;
 
     /**
      * Closes the left sidebar.
@@ -929,28 +945,28 @@ declare namespace SDK {
      *
      * @param data Ignored for now.
      */
-    closeLeftSidebar(data?: any): void
+    closeLeftSidebar(data?: any): void;
 
     /**
      * Closes the library.
      * Throws error if the library was not opened by the plugin
      * @param data Ignored for now.
      */
-    closeLibrary(data?: any): void
+    closeLibrary(data?: any): void;
 
     /**
      * Closes the modal.
      * Throws error if the modal was not opened by the plugin
      * @param data Ignored for now.
      */
-    closeModal(data?: any): void
+    closeModal(data?: any): void;
 
     /**
      * Closes the bottom panel.
      * Throws error if the bottom panel was not opened by the plugin
      * @param data Ignored for now.
      */
-    closeBottomPanel(data?: any): void
+    closeBottomPanel(data?: any): void;
 
     /**
      * Resizes the current iframe inside the bottom-panel.
@@ -959,7 +975,9 @@ declare namespace SDK {
      *
      * The left sidebar and the modal are not yet supported.
      */
-    resizeTo(value: HTMLElement | string | {width?: number; height?: number}): void
+    resizeTo(
+      value: HTMLElement | string | { width?: number; height?: number }
+    ): void;
     /**
      * Enables a container (HTMLElement) to have draggable elements (items).
      *
@@ -995,45 +1013,48 @@ declare namespace SDK {
      * ```
      *
      */
-    initDraggableItemsContainer(container: HTMLElement, options: DraggableItemsContainerOptions): void
+    initDraggableItemsContainer(
+      container: HTMLElement,
+      options: DraggableItemsContainerOptions
+    ): void;
 
     /**
      * Selects the board default tool
      * @experimental
      */
-    __selectDefaultTool(): void
+    __selectDefaultTool(): void;
 
     /**
      * Hides interface panels [[UIPanel]]
      * @experimental
      */
-    __hideButtonsPanels(panels: 'all' | UIPanel | UIPanel[]): void
+    __hideButtonsPanels(panels: "all" | UIPanel | UIPanel[]): void;
 
     /**
      * Shows interface panels [[UIPanel]]
      */
-    __showButtonsPanels(panels: 'all' | UIPanel | UIPanel[]): void
+    __showButtonsPanels(panels: "all" | UIPanel | UIPanel[]): void;
 
     /**
      * Sets the toolbar mode. Some modes show more options than other. Example: the `viewer` can only see the default tool.
      *
      * *Note: this will not limit the ability of the current user to interact with the board widgets.*
      */
-    __limitToolbarMode(mode: 'editor' | 'commentor' | 'viewer'): void
+    __limitToolbarMode(mode: "editor" | "commentor" | "viewer"): void;
 
     /**
      * Removes any limitation set with [[__limitToolbarMode]].
      *
      * *Note: this will not allow a non-authorized user to modify the board*
      */
-    __clearToolbarModeLimit(): void
+    __clearToolbarModeLimit(): void;
   }
 
   /**
    * The available panels in the board.
    * @category Extension Points
    */
-  type UIPanel = 'toolbar' | 'top' | 'bottomBar' | 'map'
+  type UIPanel = "toolbar" | "top" | "bottomBar" | "map";
 
   /**
    * Utilities to work with a board.
@@ -1043,7 +1064,7 @@ declare namespace SDK {
     /**
      * Calculates the union boundaries of several widgets.
      */
-    unionWidgetBounds(widgets: {bounds: IBounds}[]): IBounds
+    unionWidgetBounds(widgets: { bounds: IBounds }[]): IBounds;
   }
 
   /**
@@ -1054,28 +1075,33 @@ declare namespace SDK {
     /**
      * Returns information about the current viewport position
      */
-    get(): Promise<IRect>
+    get(): Promise<IRect>;
     /**
      * Allows to set the board viewport
      */
-    set(viewport: IRect, options?: IViewportOptions): Promise<IRect>
+    set(viewport: IRect, options?: IViewportOptions): Promise<IRect>;
     /**
      * Returns the viewport scale (zoom level)
      */
-    getScale(): Promise<number>
+    getScale(): Promise<number>;
+
+    /**
+     * Zooms the viewport around the specified widget on the board
+     */
+    zoomToObject(items: IWidget | IWidget[]): Promise<void>;
 
     /**
      * Adds a black mask over the canvas.
      * @experimental
      */
-    __mask(viewport: IRect, padding?: IOffset): void
+    __mask(viewport: IRect, padding?: IOffset): void;
 
     // [Experimental feature] Remove mask
     /**
      * Removes any mask set over the canvas.
      * @experimental
      */
-    __unmask(): void
+    __unmask(): void;
   }
 
   /**
@@ -1087,12 +1113,12 @@ declare namespace SDK {
      * Padding between the target viewport and the final result
      * Defaults to 0
      */
-    padding?: IOffset
+    padding?: IOffset;
     /**
      * Time in milliseconds for an animation effect.
      * Defaults to no animation.
      */
-    animationTimeInMS?: number // No animation by default
+    animationTimeInMS?: number; // No animation by default
   }
 
   /**
@@ -1106,7 +1132,7 @@ declare namespace SDK {
      * @returns The currently selected widgets
      *
      */
-    get(): Promise<IWidget[]>
+    get(): Promise<IWidget[]>;
 
     /**
      * Selects an specific widget.
@@ -1116,14 +1142,14 @@ declare namespace SDK {
      * @returns The selected widgets
      *
      */
-    selectWidgets(widgetIds: InputWidgets): Promise<IWidget[]>
+    selectWidgets(widgetIds: InputWidgets): Promise<IWidget[]>;
 
     /**
      * Unselect all widgets in the board
      *
      * @returns A promised fulfilled if the action can be performed.
      */
-    clear(): Promise<void>
+    clear(): Promise<void>;
 
     /**
      * Creates a dark mask and prompts the current user to select a widget in the board (widget selection mode).
@@ -1135,7 +1161,7 @@ declare namespace SDK {
      * @returns A promise resolving into the selected widgets.
      * If the user cancels the selection the array of selected widgets will be empty
      */
-    enterSelectWidgetsMode(): Promise<{selectedWidgets: IWidget[]}>
+    enterSelectWidgetsMode(): Promise<{ selectedWidgets: IWidget[] }>;
   }
 
   /**
@@ -1159,7 +1185,9 @@ declare namespace SDK {
      *
      * @returns A promise resolving into an array containing the newly created widgets.
      */
-    create<T extends IWidget>(widgets: OneOrMany<WidgetToBeCreated>): Promise<T[]>
+    create<T extends IWidget>(
+      widgets: OneOrMany<WidgetToBeCreated>
+    ): Promise<T[]>;
 
     /**
      * Get all the board widgets matching a filter `filterBy`.
@@ -1176,7 +1204,7 @@ declare namespace SDK {
      * @returns A promise resolving into an array of widgets matching the filter
      *
      */
-    get<T extends IWidget>(filterBy?: Record<string, unknown>): Promise<T[]>
+    get<T extends IWidget>(filterBy?: Record<string, unknown>): Promise<T[]>;
 
     /**
      * Modify one or many widgets in the board.
@@ -1189,7 +1217,9 @@ declare namespace SDK {
      *
      * @returns A promise resolving into an array with the modified widgets.
      */
-    update<T extends IWidget>(widgets: OneOrMany<{id: string; [index: string]: any}>): Promise<T[]>
+    update<T extends IWidget>(
+      widgets: OneOrMany<{ id: string; [index: string]: any }>
+    ): Promise<T[]>;
 
     /**
      * Modifies the widgets position and rotation based on the passed parameters.
@@ -1205,11 +1235,11 @@ declare namespace SDK {
      * @returns A promise resolving into an array with the modified widgets.
      */
     transformDelta(
-        widgetIds: InputWidgets,
-        deltaX?: number,
-        deltaY?: number,
-        deltaRotation?: number,
-    ): Promise<IWidget[]>
+      widgetIds: InputWidgets,
+      deltaX?: number,
+      deltaY?: number,
+      deltaRotation?: number
+    ): Promise<IWidget[]>;
 
     /**
      * Deletes a single widget from the board
@@ -1220,7 +1250,7 @@ declare namespace SDK {
      * @param widgetIds Widget to be deleted
      * @returns A promise resolving after the widget was deleted.
      */
-    deleteById(widgetIds: InputWidgets): Promise<void>
+    deleteById(widgetIds: InputWidgets): Promise<void>;
 
     /**
      * Brings a widget forward in the board (above other widgets)
@@ -1231,7 +1261,7 @@ declare namespace SDK {
      * @param widgetIds Widget to be affected.
      * @returns A promise resolving after the widget was brought forward.
      */
-    bringForward(widgetId: InputWidgets): Promise<void>
+    bringForward(widgetId: InputWidgets): Promise<void>;
 
     /**
      * Send a widget to the back (below other widgets).
@@ -1242,7 +1272,7 @@ declare namespace SDK {
      * @param widgetIds Widget to be affected.
      * @returns A promise resolving after the widget was sent forward.
      */
-    sendBackward(widgetId: InputWidgets): Promise<void>
+    sendBackward(widgetId: InputWidgets): Promise<void>;
 
     /**
      * Checks if all widgets on the board had been loaded.
@@ -1250,7 +1280,7 @@ declare namespace SDK {
      * @returns A promise resolving after all the widgets in the board had been loaded.
      *
      */
-    areAllWidgetsLoaded(): Promise<boolean>
+    areAllWidgetsLoaded(): Promise<boolean>;
 
     /**
      * Finds all widgets intersected in a specific area.
@@ -1261,7 +1291,7 @@ declare namespace SDK {
      *
      * @returns A Promise resolving with the widgets found in the requested area.
      */
-    __getIntersectedObjects(pointOrRect: IPoint | IRect): Promise<IWidget[]>
+    __getIntersectedObjects(pointOrRect: IPoint | IRect): Promise<IWidget[]>;
 
     /**
      * Makes a widget perform a "blink" animation in the board.
@@ -1269,24 +1299,33 @@ declare namespace SDK {
      *
      * @returns A promise resolving if the widget was found.
      */
-    __blinkWidget(widgets: InputWidgets): Promise<void>
+    __blinkWidget(widgets: InputWidgets): Promise<void>;
   }
 
   /**
    * Commands to interact and manipulate tags
    * @category Widgets Manipulation
    */
-  type InputTags = string | string[] | {id: string} | {id: string}[]
+  type InputTags = string | string[] | { id: string } | { id: string }[];
   /**
    * Commands to interact and manipulate tags
    * @category Widgets Manipulation
    */
-  type CreateTagRequest = {title: string; color: number | string; widgetIds?: InputWidgets}
+  type CreateTagRequest = {
+    title: string;
+    color: number | string;
+    widgetIds?: InputWidgets;
+  };
   /**
    * Commands to interact and manipulate tags
    * @category Widgets Manipulation
    */
-  type UpdateTagRequest = {id: string; title?: string; color?: number | string; widgetIds?: InputWidgets}
+  type UpdateTagRequest = {
+    id: string;
+    title?: string;
+    color?: number | string;
+    widgetIds?: InputWidgets;
+  };
 
   /**
    * Commands to interact and manipulate tags
@@ -1302,7 +1341,7 @@ declare namespace SDK {
      * @returns A promise resolving into the found tags.
      *
      */
-    get(filterBy?: Record<string, unknown>): Promise<ITag[]>
+    get(filterBy?: Record<string, unknown>): Promise<ITag[]>;
 
     /**
      * Creates one or many tags as defined in the [[CreateTagRequest]].
@@ -1313,7 +1352,7 @@ declare namespace SDK {
      * @param tags Details of the tag being created. It may include what widgets will have the tag. A `title` is always required.
      * @returns A promise resolving into the created tags.
      */
-    create(tags: OneOrMany<CreateTagRequest>): Promise<ITag[]>
+    create(tags: OneOrMany<CreateTagRequest>): Promise<ITag[]>;
 
     /**
      * Update one or many tags as defined in the [[UpdateTagRequest]]
@@ -1324,7 +1363,7 @@ declare namespace SDK {
      * @param tags The tags to be updated. An `id` is always required.
      * @returns A promise resolving into the updated tags.
      */
-    update(tags: OneOrMany<UpdateTagRequest>): Promise<ITag[]>
+    update(tags: OneOrMany<UpdateTagRequest>): Promise<ITag[]>;
 
     /**
      * Deletes one or many tags.
@@ -1335,7 +1374,7 @@ declare namespace SDK {
      * @param tags The tags to be deleted.
      * @returns A promise resolving when the tags are deleted.
      */
-    delete(tags: InputTags): Promise<void>
+    delete(tags: InputTags): Promise<void>;
   }
 
   /**
@@ -1345,7 +1384,7 @@ declare namespace SDK {
     /**
      * Requires scope: BOARDS:READ
      */
-    get(): Promise<IComment[]>
+    get(): Promise<IComment[]>;
   }
 
   /**
@@ -1355,16 +1394,16 @@ declare namespace SDK {
     /**
      * Requires scope: BOARDS:READ
      */
-    get(): Promise<IGroup[]>
+    get(): Promise<IGroup[]>;
   }
 
   /**
    * @category Board Manipulation
    */
   interface IGroup {
-    id: string
-    bounds: IBounds
-    childrenIds: string[]
+    id: string;
+    bounds: IBounds;
+    childrenIds: string[];
   }
 
   /**
@@ -1372,16 +1411,16 @@ declare namespace SDK {
    * @category Widgets Manipulation
    */
   interface ITag {
-    id: string
-    title: string
+    id: string;
+    title: string;
     /**
      * The color of the tag
      */
-    color: string | number
+    color: string | number;
     /**
      * A list of ids with the assigned tag.
      */
-    widgetIds: string[]
+    widgetIds: string[];
   }
 
   ////////////////////////////////////////////////////////////////////////
@@ -1391,172 +1430,172 @@ declare namespace SDK {
   /**
    * @category Widgets Manipulation
    */
-  type OneOrMany<T> = T | T[]
+  type OneOrMany<T> = T | T[];
 
   /**
    * @category Widgets Manipulation
    */
-  type WidgetMetadata = {[x: string]: any}
+  type WidgetMetadata = { [x: string]: any };
 
   /**
    * @category Widgets Manipulation
    */
-  type WidgetCapabilities = {editable: boolean}
+  type WidgetCapabilities = { editable: boolean };
 
   /**
    * @category Widgets Manipulation
    */
   interface IWidgetNamespaces {
-    metadata: WidgetMetadata
-    capabilities: WidgetCapabilities
-    clientVisible: boolean
+    metadata: WidgetMetadata;
+    capabilities: WidgetCapabilities;
+    clientVisible: boolean;
   }
 
   /**
    * @category Widgets Manipulation
    */
-  type WidgetNamespacesKeys = keyof IWidgetNamespaces
+  type WidgetNamespacesKeys = keyof IWidgetNamespaces;
 
   /**
    * Defines a basic widget and its properties
    * @category Widgets Manipulation
    */
   interface IWidget extends IWidgetNamespaces {
-    readonly id: string
-    readonly type: string
-    readonly bounds: IBounds
-    readonly groupId?: string
-    readonly createdUserId: string
-    readonly lastModifiedUserId: string
+    readonly id: string;
+    readonly type: string;
+    readonly bounds: IBounds;
+    readonly groupId?: string;
+    readonly createdUserId: string;
+    readonly lastModifiedUserId: string;
   }
 
   /**
    * @category Widgets Manipulation
    */
   interface ITextWidget extends IWidget {
-    type: 'TEXT'
-    x: number
-    y: number
-    width: number
-    scale: number
-    rotation: number
-    text: string
+    type: "TEXT";
+    x: number;
+    y: number;
+    width: number;
+    scale: number;
+    rotation: number;
+    text: string;
     style: {
-      backgroundColor: BackgroundColorStyle
-      backgroundOpacity: BackgroundOpacityStyle
+      backgroundColor: BackgroundColorStyle;
+      backgroundOpacity: BackgroundOpacityStyle;
       /**
        * @deprecated
        */
-      borderColor: BorderColorStyle
+      borderColor: BorderColorStyle;
       /**
        * @deprecated
        */
-      borderWidth: BorderWidthStyle
+      borderWidth: BorderWidthStyle;
       /**
        * @deprecated
        */
-      borderStyle: BorderStyle
+      borderStyle: BorderStyle;
       /**
        * @deprecated
        */
-      borderOpacity: BorderOpacityStyle
-      fontFamily: FontFamily
-      textColor: TextColorStyle
-      textAlign: TextAlign
-      highlighting: HighlightingStyle
-      italic: ItalicStyle
-      strike: StrikeStyle
-      underline: UnderlineStyle
-      bold: BoldStyle
+      borderOpacity: BorderOpacityStyle;
+      fontFamily: FontFamily;
+      textColor: TextColorStyle;
+      textAlign: TextAlign;
+      highlighting: HighlightingStyle;
+      italic: ItalicStyle;
+      strike: StrikeStyle;
+      underline: UnderlineStyle;
+      bold: BoldStyle;
       /**
        * @deprecated
        */
-      padding: PaddingStyle
-    }
+      padding: PaddingStyle;
+    };
   }
 
   /**
    * @category Widgets Manipulation
    */
   interface IImageWidget extends IWidget {
-    type: 'IMAGE'
-    x: number
-    y: number
-    rotation: number
-    scale: number
-    title: string
-    url: string
+    type: "IMAGE";
+    x: number;
+    y: number;
+    rotation: number;
+    scale: number;
+    title: string;
+    url: string;
   }
 
   /**
    * @category Widgets Manipulation
    */
   interface IStickerWidget extends IWidget {
-    type: 'STICKER'
-    x: number
-    y: number
-    scale: number
+    type: "STICKER";
+    x: number;
+    y: number;
+    scale: number;
 
     /**
      * This text will include HTML characters if present.
      */
-    text: string
+    text: string;
 
     /**
      * This text does not include HTML characters.
      */
-    plainText: string
+    plainText: string;
     style: {
-      stickerBackgroundColor: BackgroundColorStyle
-      fontSize: FontSizeStyle
-      textAlign: TextAlign
-      textAlignVertical: TextAlignVertical
-      stickerType: StickerType
-      fontFamily: FontFamily
-    }
+      stickerBackgroundColor: BackgroundColorStyle;
+      fontSize: FontSizeStyle;
+      textAlign: TextAlign;
+      textAlignVertical: TextAlignVertical;
+      stickerType: StickerType;
+      fontFamily: FontFamily;
+    };
 
-    readonly tags: ITag[]
+    readonly tags: ITag[];
   }
 
   /**
    * @category Widgets Manipulation
    */
   interface IShapeWidget extends IWidget {
-    type: 'SHAPE'
-    x: number
-    y: number
-    width: number
-    height: number
-    rotation: number
+    type: "SHAPE";
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    rotation: number;
 
     /**
      * This text will include HTML characters if present.
      */
-    text: string
+    text: string;
 
     /**
      * This text does not include HTML characters.
      */
-    plainText: string
+    plainText: string;
     style: {
-      shapeType: ShapeType
-      backgroundColor: BackgroundColorStyle
-      backgroundOpacity: BackgroundOpacityStyle
-      borderColor: BorderColorStyle
-      borderWidth: BorderWidthStyle
-      borderStyle: BorderStyle
-      borderOpacity: BorderOpacityStyle
-      fontSize: FontSizeStyle
-      fontFamily: FontFamily
-      textColor: TextColorStyle
-      textAlign: TextAlign
-      textAlignVertical: TextAlignVertical
-      highlighting: HighlightingStyle
-      italic: ItalicStyle
-      strike: StrikeStyle
-      underline: UnderlineStyle
-      bold: BoldStyle
-    }
+      shapeType: ShapeType;
+      backgroundColor: BackgroundColorStyle;
+      backgroundOpacity: BackgroundOpacityStyle;
+      borderColor: BorderColorStyle;
+      borderWidth: BorderWidthStyle;
+      borderStyle: BorderStyle;
+      borderOpacity: BorderOpacityStyle;
+      fontSize: FontSizeStyle;
+      fontFamily: FontFamily;
+      textColor: TextColorStyle;
+      textAlign: TextAlign;
+      textAlignVertical: TextAlignVertical;
+      highlighting: HighlightingStyle;
+      italic: ItalicStyle;
+      strike: StrikeStyle;
+      underline: UnderlineStyle;
+      bold: BoldStyle;
+    };
   }
 
   /**
@@ -1567,182 +1606,182 @@ declare namespace SDK {
    * @category Widgets Manipulation
    */
   interface ILineWidget extends IWidget {
-    type: 'LINE'
+    type: "LINE";
     /**
      * Mandatory field
      */
-    startWidgetId: string | undefined
+    startWidgetId: string | undefined;
     /**
      * Mandatory field
      */
-    endWidgetId: string | undefined
-    readonly startPosition: IPoint
-    readonly endPosition: IPoint
-    readonly captions: {text: string}[]
+    endWidgetId: string | undefined;
+    readonly startPosition: IPoint;
+    readonly endPosition: IPoint;
+    readonly captions: { text: string }[];
     style: {
-      lineColor: LineColorStyle
-      lineThickness: LineThicknessStyle
-      lineStyle: LineStyle
-      lineType: LineType
-      lineStartStyle: LineArrowheadStyle
-      lineEndStyle: LineArrowheadStyle
-    }
+      lineColor: LineColorStyle;
+      lineThickness: LineThicknessStyle;
+      lineStyle: LineStyle;
+      lineType: LineType;
+      lineStartStyle: LineArrowheadStyle;
+      lineEndStyle: LineArrowheadStyle;
+    };
   }
 
   /**
    * @category Widgets Manipulation
    */
   interface IWebScreenshotWidget extends IWidget {
-    type: 'WEBSCREEN'
-    x: number
-    y: number
-    scale: number
-    readonly url: string
+    type: "WEBSCREEN";
+    x: number;
+    y: number;
+    scale: number;
+    readonly url: string;
   }
 
   /**
    * @category Widgets Manipulation
    */
   interface IFrameWidget extends IWidget {
-    type: 'FRAME'
-    x: number
-    y: number
-    width: number
-    height: number
-    title: string
-    readonly frameIndex: number
-    readonly childrenIds: string[]
+    type: "FRAME";
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    title: string;
+    readonly frameIndex: number;
+    readonly childrenIds: string[];
     style: {
-      backgroundColor: BackgroundColorStyle
-    }
+      backgroundColor: BackgroundColorStyle;
+    };
   }
 
   /**
    * @category Widgets Manipulation
    */
   interface ICurveWidget extends IWidget {
-    type: 'CURVE'
-    x: number
-    y: number
-    scale: number
-    rotation: number
-    points: IPoint[]
+    type: "CURVE";
+    x: number;
+    y: number;
+    scale: number;
+    rotation: number;
+    points: IPoint[];
     style: {
-      lineColor: LineColorStyle
-      lineWidth: LineThicknessStyle
-    }
+      lineColor: LineColorStyle;
+      lineWidth: LineThicknessStyle;
+    };
   }
 
   /**
    * @category Widgets Manipulation
    */
   interface IEmbedWidget extends IWidget {
-    type: 'EMBED'
-    x: number
-    y: number
-    scale: number
-    html: string
+    type: "EMBED";
+    x: number;
+    y: number;
+    scale: number;
+    html: string;
   }
 
   /**
    * @category Widgets Manipulation
    */
   interface IPreviewWidget extends IWidget {
-    type: 'PREVIEW'
-    x: number
-    y: number
-    scale: number
-    readonly url: string
+    type: "PREVIEW";
+    x: number;
+    y: number;
+    scale: number;
+    readonly url: string;
   }
 
   /**
    * @category Widgets Manipulation
    */
   interface IEmojiWidget extends IWidget {
-    type: 'EMOJI'
-    x: number
-    y: number
-    scale: number
-    rotation: number
-    readonly code: string
+    type: "EMOJI";
+    x: number;
+    y: number;
+    scale: number;
+    rotation: number;
+    readonly code: string;
   }
 
   /**
    * @category Widgets Manipulation
    */
   interface ICardWidget extends IWidget {
-    type: 'CARD'
-    x: number
-    y: number
-    scale: number
-    rotation: number
-    title: string
-    description: string
+    type: "CARD";
+    x: number;
+    y: number;
+    scale: number;
+    rotation: number;
+    title: string;
+    description: string;
     /**
      * Date format: `YYYY-mm-dd`
      */
-    date?: string
+    date?: string;
     assignee?: {
-      userId: string
-    }
+      userId: string;
+    };
     card: {
       customFields?: {
-        value?: string
-        mainColor?: string
-        fontColor?: string
-        iconUrl?: string
-        roundedIcon?: boolean
-      }[]
+        value?: string;
+        mainColor?: string;
+        fontColor?: string;
+        iconUrl?: string;
+        roundedIcon?: boolean;
+      }[];
       logo?: {
-        iconUrl: string
-      }
-    }
+        iconUrl: string;
+      };
+    };
     style: {
-      backgroundColor: BackgroundColorStyle
-    }
+      backgroundColor: BackgroundColorStyle;
+    };
 
-    readonly tags: ITag[]
+    readonly tags: ITag[];
   }
 
   /**
    * @category Widgets Manipulation
    */
   interface IDocumentWidget extends IWidget {
-    type: 'DOCUMENT'
-    x: number
-    y: number
-    rotation: number
-    scale: number
-    title: string
+    type: "DOCUMENT";
+    x: number;
+    y: number;
+    rotation: number;
+    scale: number;
+    title: string;
   }
 
   /**
    * @category Widgets Manipulation
    */
   interface IMockupWidget extends IWidget {
-    type: 'MOCKUP'
-    x: number
-    y: number
-    rotation: number
-    readonly mockupType: string
+    type: "MOCKUP";
+    x: number;
+    y: number;
+    rotation: number;
+    readonly mockupType: string;
   }
 
   /**
    * @category Widgets Manipulation
    */
   interface IComment extends IWidget {
-    type: 'COMMENT'
-    color: number
-    resolved: boolean
+    type: "COMMENT";
+    color: number;
+    resolved: boolean;
   }
 
   /**
    * @category Widgets Manipulation
    */
   interface IWidgetShortData {
-    id: string
-    type?: string
-    metadata?: any
+    id: string;
+    type?: string;
+    metadata?: any;
   }
 
   ////////////////////////////////////////////////////////////////////////
@@ -1752,100 +1791,100 @@ declare namespace SDK {
   /**
    * @category Account and User
    */
-  type BoardPermission = 'EDIT_INFO' | 'EDIT_CONTENT' | 'EDIT_COMMENTS'
+  type BoardPermission = "EDIT_INFO" | "EDIT_CONTENT" | "EDIT_COMMENTS";
   /**
    * @category Account and User
    */
-  type AccountPermission = 'MANAGE_APPS'
+  type AccountPermission = "MANAGE_APPS";
 
   /**
    * @category Board Manipulation
    */
   interface IBoardInfo {
-    id: string
-    title: string
-    description: string
-    owner?: IUserInfo
-    picture: IPictureInfo
-    currentUserPermissions: BoardPermission[]
-    lastModifyingUser: IUserInfo
-    lastViewedByMeDate: string
-    modifiedByMeDate: string
-    createdAt: string
-    updatedAt: string
+    id: string;
+    title: string;
+    description: string;
+    owner?: IUserInfo;
+    picture: IPictureInfo;
+    currentUserPermissions: BoardPermission[];
+    lastModifyingUser: IUserInfo;
+    lastViewedByMeDate: string;
+    modifiedByMeDate: string;
+    createdAt: string;
+    updatedAt: string;
   }
 
   /**
    * @category Account and User
    */
   interface IUserInfo {
-    id: string
-    name: string
-    email: string
-    picture: IPictureInfo
+    id: string;
+    name: string;
+    email: string;
+    picture: IPictureInfo;
   }
 
   /**
    * @category Account and User
    */
   interface IAccountInfo {
-    id: string
-    title: string
-    currentUserPermissions: AccountPermission[]
-    createdAt: string
-    picture: IPictureInfo
+    id: string;
+    title: string;
+    currentUserPermissions: AccountPermission[];
+    createdAt: string;
+    picture: IPictureInfo;
   }
 
   /**
    * @category Account and User
    */
   interface IPictureInfo {
-    big: string
-    medium: string
-    small: string
-    image: string //original picture
+    big: string;
+    medium: string;
+    small: string;
+    image: string; //original picture
   }
 
   /**
    * @category General
    */
   interface IRect {
-    x: number
-    y: number
-    width: number
-    height: number
+    x: number;
+    y: number;
+    width: number;
+    height: number;
   }
 
   /**
    * @category General
    */
   interface IOffset {
-    top: number
-    left: number
-    bottom: number
-    right: number
+    top: number;
+    left: number;
+    bottom: number;
+    right: number;
   }
 
   /**
    * @category General
    */
   interface IPoint {
-    x: number
-    y: number
+    x: number;
+    y: number;
   }
 
   /**
    * @category General
    */
   interface IBounds {
-    x: number
-    y: number
-    top: number
-    left: number
-    bottom: number
-    right: number
-    width: number
-    height: number
+    x: number;
+    y: number;
+    top: number;
+    left: number;
+    bottom: number;
+    right: number;
+    width: number;
+    height: number;
   }
 
   /////////////////////////////////////////////
@@ -1854,63 +1893,63 @@ declare namespace SDK {
   /**
    * @category Styling
    */
-  type BackgroundColorStyle = string | number
+  type BackgroundColorStyle = string | number;
   /**
    * @category Styling
    */
-  type BackgroundOpacityStyle = number
+  type BackgroundOpacityStyle = number;
   /**
    * @category Styling
    */
-  type BorderColorStyle = string | number
+  type BorderColorStyle = string | number;
   /**
    * @category Styling
    */
-  type BorderWidthStyle = number
+  type BorderWidthStyle = number;
   /**
    * @category Styling
    */
-  type BorderOpacityStyle = number
+  type BorderOpacityStyle = number;
   /**
    * @category Styling
    */
-  type FontSizeStyle = number
+  type FontSizeStyle = number;
   /**
    * @category Styling
    */
-  type TextColorStyle = string | number
+  type TextColorStyle = string | number;
   /**
    * @category Styling
    */
-  type HighlightingStyle = string | number
+  type HighlightingStyle = string | number;
   /**
    * @category Styling
    */
-  type ItalicStyle = 0 | 1
+  type ItalicStyle = 0 | 1;
   /**
    * @category Styling
    */
-  type StrikeStyle = 0 | 1
+  type StrikeStyle = 0 | 1;
   /**
    * @category Styling
    */
-  type UnderlineStyle = 0 | 1
+  type UnderlineStyle = 0 | 1;
   /**
    * @category Styling
    */
-  type PaddingStyle = 0 | 8
+  type PaddingStyle = 0 | 8;
   /**
    * @category Styling
    */
-  type BoldStyle = 0 | 1
+  type BoldStyle = 0 | 1;
   /**
    * @category Styling
    */
-  type LineColorStyle = string | number
+  type LineColorStyle = string | number;
   /**
    * @category Styling
    */
-  type LineThicknessStyle = number
+  type LineThicknessStyle = number;
   /**
    * @category Styling
    */
@@ -1999,18 +2038,18 @@ declare namespace SDK {
    * @category Styling
    */
   enum TextAlign {
-    LEFT = 'l',
-    CENTER = 'c',
-    RIGHT = 'r',
+    LEFT = "l",
+    CENTER = "c",
+    RIGHT = "r",
   }
 
   /**
    * @category Styling
    */
   enum TextAlignVertical {
-    TOP = 't',
-    MIDDLE = 'm',
-    BOTTOM = 'b',
+    TOP = "t",
+    MIDDLE = "m",
+    BOTTOM = "b",
   }
 
   /**
@@ -2051,19 +2090,19 @@ declare namespace SDK {
    * @category Styling
    */
   interface IEnums {
-    shapeType: typeof ShapeType
-    stickerType: typeof StickerType
-    borderStyle: typeof BorderStyle
-    fontFamily: typeof FontFamily
-    textAlign: typeof TextAlign
-    textAlignVertical: typeof TextAlignVertical
-    lineStyle: typeof LineStyle
-    lineType: typeof LineType
-    lineArrowheadStyle: typeof LineArrowheadStyle
+    shapeType: typeof ShapeType;
+    stickerType: typeof StickerType;
+    borderStyle: typeof BorderStyle;
+    fontFamily: typeof FontFamily;
+    textAlign: typeof TextAlign;
+    textAlignVertical: typeof TextAlignVertical;
+    lineStyle: typeof LineStyle;
+    lineType: typeof LineType;
+    lineArrowheadStyle: typeof LineArrowheadStyle;
   }
   /**
    * > **Note**: when creating a widget that requires a URL, if the URL has special characters. Make sure the URL is encoded properly.
    * @category Widgets Manipulation
    */
-  type WidgetToBeCreated = {type: string; [index: string]: any}
+  type WidgetToBeCreated = { type: string; [index: string]: any };
 }

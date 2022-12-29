@@ -3,7 +3,7 @@ app:
   miroBaseUrl: https://miro.com
   miroApiBaseUrl: https://api.miro.com
   # https://miro.com/marketplace/jira/
-  clientId: 3074457346182612612
+  clientId: 0
   clientSecret: ""
 
 server:

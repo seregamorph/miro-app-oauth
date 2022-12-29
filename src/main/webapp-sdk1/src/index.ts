@@ -1,8 +1,8 @@
-import icon from './icon.svg'
+import icon from "./icon.svg";
 
 miro.onReady((): void => {
-  let appName = new URLSearchParams(window.location.search).get("appName");
-  let title = appName == null ? 'miro-app-oauth' : appName;
+  const appName = new URLSearchParams(window.location.search).get("appName");
+  const title = appName || "miro-app-oauth";
   miro.initialize({
     extensionPoints: {
       toolbar: {
@@ -11,9 +11,11 @@ miro.onReady((): void => {
         librarySvgIcon: icon,
         async onClick(): Promise<void> {
           // Remember that 'app.html' resolves relative to index.js file. So app.html have to be in the /dist/ folder.
-          await miro.board.ui.openLibrary('app.html', {title: title})
+          await miro.board.ui.openLibrary("/webapp-sdk1/app.html", {
+            title: title,
+          });
         },
       },
     },
-  })
-})
+  });
+});
