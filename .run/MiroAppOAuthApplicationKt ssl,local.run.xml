@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="MiroAppOAuthApplicationKt ssl,local" type="JetRunConfigurationType">
+    <option name="MAIN_CLASS_NAME" value="com.miro.miroappoauth.MiroAppOAuthApplicationKt" />
+    <module name="miro-app-oauth" />
+    <shortenClasspath name="NONE" />
+    <option name="VM_PARAMETERS" value="-Dspring.profiles.active=ssl,local" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+      <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="generate-resources" />
+    </method>
+  </configuration>
+</component>
