@@ -62,8 +62,8 @@ Pass JDBC URL: `jdbc:h2:file:./miro-app-oauth_h2`, empty User Name and Password 
 # Authorization flow
 ```mermaid
 sequenceDiagram
-    miro.com/app/board/{id}->>miro.com/oauth/authorize: Embedded auth page
-    miro.com/oauth/authorize->>localhost/install: 302 redirect with parameters code
+    miro.com/app/board/{id}->>miro.com/app-install: Embedded auth page
+    miro.com/app-install->>localhost/install: 302 redirect with parameters code
     localhost/install-->>api.miro.com/v1/oauth/token: Pass code
     api.miro.com/v1/oauth/token-->>localhost/install: Return access_token
     localhost/install->>miro.com/app-install-completed: Redirect to default page

@@ -175,7 +175,7 @@ class HomeController(
 
     private fun getAuthorizeUrl(redirectUri: URI/*, state: String*/): String {
         return UriComponentsBuilder.fromHttpUrl(appProperties.miroBaseUrl)
-            .path("/oauth/authorize")
+            .path("/app-install")
             .queryParam("response_type", "code")
             .queryParam("client_id", appProperties.clientId)
             .queryParam("redirect_uri", redirectUri)
