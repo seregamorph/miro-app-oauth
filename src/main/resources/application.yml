@@ -36,4 +36,7 @@ management.server:
 management.endpoints.web:
   exposure.include: "*"
   base-path: /manage
+management.endpoints.jackson:
+  isolated-object-mapper: false
+
 
