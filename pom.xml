@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.0-M3</version>
+        <version>3.2.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -21,7 +21,7 @@
         <yarn.version>v1.22.18</yarn.version>
         <npm.version>8.7.0</npm.version>
         <bootstrap.version>4.2.1</bootstrap.version>
-        <kotlin.version>1.9.10</kotlin.version>
+        <kotlin.version>1.9.21</kotlin.version>
 
         <webapp-sdk1.dir>src/main/webapp-sdk1</webapp-sdk1.dir>
         <webapp-sdk2.dir>src/main/webapp-sdk2</webapp-sdk2.dir>

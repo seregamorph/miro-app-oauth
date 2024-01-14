@@ -1,9 +1,5 @@
 
 app:
-#  Override the environment we are testing our application on. Default is EU.
-#  miroBaseUrl: https://miro-us.miro.com
-#  miroApiBaseUrl: https://api.miro-us.miro.com
-
-#  teamId: 3074457345600000000
-  clientId: 3074457345600000000
-  clientSecret: "TkEUKcn4mLkqSjMA0000000000000000"
+#  teamId: 3450000000000000000
+  clientId: 3450000000000000000
+  clientSecret: "ajer6aRP0wHgLEq90000000000000000"
