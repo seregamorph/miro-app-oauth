@@ -24,11 +24,11 @@ spring.datasource:
   url: jdbc:h2:file:./miro-app-oauth_h2;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
   driver-class-name: org.h2.Driver
 
+# hint: username/password empty
 spring.h2.console:
   enabled: true
   path: /h2-console
   settings:
-    web-admin-password: password
     web-allow-others: false
 
 management.server:
