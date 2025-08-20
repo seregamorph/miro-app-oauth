@@ -39,7 +39,7 @@ class MiroAppOAuthApplication {
             log.info("Management server started at {}://localhost:{}/manage", protocol, event.webServer.port)
         } else {
             log.info("Server started at {}://localhost:{}", protocol, event.webServer.port)
-            if (h2ConsoleProperties.enabled) {
+            if (h2ConsoleProperties.isEnabled) {
                 log.info(
                     "H2 console started at {}://localhost:{}{} ({})",
                     protocol, event.webServer.port, h2ConsoleProperties.path,
