@@ -16,7 +16,7 @@ import java.util.Optional;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
- * Interceptor for RestTemplate/TestRestTemplate that logs HTTP request and response (on the level of RestTemplate
+ * Interceptor for RestClient/RestTemplate/TestRestTemplate that logs HTTP request and response (on the level of RestTemplate
  * layer, e.g. it doesn't print "Host" header (added by real HTTP client)).
  */
 public class LoggingInterceptor implements ClientHttpRequestInterceptor {

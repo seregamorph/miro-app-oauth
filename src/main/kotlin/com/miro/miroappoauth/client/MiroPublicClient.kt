@@ -2,35 +2,30 @@ package com.miro.miroappoauth.client
 
 import com.miro.miroappoauth.dto.*
 import com.miro.miroappoauth.dto.CreateBoardDto.SharingPolicyDto
-import org.springframework.http.HttpEntity
-import org.springframework.http.HttpHeaders
-import org.springframework.http.HttpMethod.GET
-import org.springframework.http.HttpMethod.POST
-import org.springframework.web.client.RestTemplate
+import org.springframework.web.client.RestClient
 
 /**
  * See [Miro REST API](https://developers.miro.com/reference).
  * Note: we use camelCase for json parsing here.
  */
 class MiroPublicClient(
-    private val rest: RestTemplate
+    private val rest: RestClient
 ) {
 
     fun getSelfUser(accessToken: String): UserDto {
-        val headers = HttpHeaders().apply {
-            //set(HttpHeaders.HOST, "api.miro.com")
-            setBearerAuth(accessToken)
-        }
-        val request = HttpEntity<Any>(null, headers)
-
-        return rest.exchange("/v1/users/me", GET, request, UserDto::class.java).body!!
+        return rest.get()
+            .uri("/v1/users/me")
+            .headers { it.setBearerAuth(accessToken) }
+            .retrieve()
+            .body(UserDto::class.java)!!
     }
 
     fun getSelfUserV2(accessToken: String, userId: Long): UserDto {
-        val headers = HttpHeaders().apply { setBearerAuth(accessToken) }
-        val request = HttpEntity<Any>(null, headers)
-
-        return rest.exchange("/v2/users/{userId}", GET, request, UserDto::class.java, userId).body!!
+        return rest.get()
+            .uri("/v2/users/{userId}", userId)
+            .headers { it.setBearerAuth(accessToken) }
+            .retrieve()
+            .body(UserDto::class.java)!!
     }
 
     fun createBoard(
@@ -39,11 +34,12 @@ class MiroPublicClient(
         accessType: AccessType,
         teamAccessType: TeamAccessType
     ): BoardDto {
-        val headers = HttpHeaders().apply { setBearerAuth(accessToken) }
-        val body = CreateBoardDto(name, SharingPolicyDto(accessType, teamAccessType))
-        val request = HttpEntity<Any>(body, headers)
-
-        return rest.exchange("/v2alpha/boards", POST, request, BoardDto::class.java).body!!
+        return rest.post()
+            .uri("/v2alpha/boards")
+            .headers { it.setBearerAuth(accessToken) }
+            .body(CreateBoardDto(name, SharingPolicyDto(accessType, teamAccessType)))
+            .retrieve()
+            .body(BoardDto::class.java)!!
     }
 
     // todo GET https://api.miro.com/v1/oauth-token

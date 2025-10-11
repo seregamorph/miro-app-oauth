@@ -1,18 +1,16 @@
 package com.miro.miroappoauth.client
 
 import com.miro.miroappoauth.dto.AccessTokenDto
-import org.springframework.http.HttpEntity
-import org.springframework.http.HttpHeaders
-import org.springframework.http.HttpMethod.POST
 import org.springframework.util.LinkedMultiValueMap
-import org.springframework.web.client.RestTemplate
+import org.springframework.web.client.RestClient
+import org.springframework.web.client.body
 
 /**
  * See [Miro REST API](https://developers.miro.com/reference).
  * Note: we use snake_case for json parsing here.
  */
 class MiroAuthClient(
-    private val rest: RestTemplate
+    private val rest: RestClient
 ) {
 
     /**
@@ -27,28 +25,22 @@ class MiroAuthClient(
             form.add("code", code)
             form.add("redirect_uri", redirectUri)
 
-            val headers = HttpHeaders().apply {
-                //set(HttpHeaders.HOST, "api.miro.com")
-            }
-
-            val request = HttpEntity<Any>(form, headers)
-
-            return rest.exchange("/v1/oauth/token", POST, request, AccessTokenDto::class.java).body!!
+            return rest.post()
+                .uri("/v1/oauth/token")
+                .body(form)
+                .retrieve()
+                .body(AccessTokenDto::class.java)!!
         } else {
-            val headers = HttpHeaders().apply {
-                //set(HttpHeaders.HOST, "api.miro.com")
-            }
-
-            val request = HttpEntity<Any>(null, headers)
-
-            return rest.exchange("/v1/oauth/token" +
-                    "?grant_type=authorization_code" +
-                    "&client_id={client_id}" +
-                    "&client_secret={client_secret}" +
-                    "&code={code}" +
-                    "&redirect_uri={redirect_uri}",
-                POST, request, AccessTokenDto::class.java,
-            clientId, clientSecret, code, redirectUri).body!!
+            return rest.post()
+                .uri(
+                    "/v1/oauth/token" +
+                            "?grant_type=authorization_code" +
+                            "&client_id={client_id}" +
+                            "&client_secret={client_secret}" +
+                            "&code={code}" +
+                            "&redirect_uri={redirect_uri}", clientId, clientSecret, code, redirectUri
+                )
+                .retrieve().body(AccessTokenDto::class.java)!!
         }
     }
 
@@ -59,7 +51,11 @@ class MiroAuthClient(
         form.add("refresh_token", refreshToken)
         form.add("client_secret", clientSecret)
 
-        return rest.postForObject("/v1/oauth/token", form, AccessTokenDto::class.java)!!
+        return rest.post()
+            .uri("/v1/oauth/token")
+            .body(form)
+            .retrieve()
+            .body(AccessTokenDto::class.java)!!
     }
 
     /**
@@ -69,6 +65,10 @@ class MiroAuthClient(
         val form = LinkedMultiValueMap<String, String>()
         form.add("access_token", accessToken)
 
-        rest.postForObject("/v1/oauth/revoke", form, Void::class.java)
+        rest.post()
+            .uri("/v1/oauth/revoke")
+            .body(form)
+            .retrieve()
+            .body<Unit>()
     }
 }
