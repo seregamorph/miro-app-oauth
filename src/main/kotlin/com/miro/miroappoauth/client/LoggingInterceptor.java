@@ -11,8 +11,6 @@ import org.springframework.util.StreamUtils;
 
 import java.io.*;
 import java.nio.charset.Charset;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -109,11 +107,6 @@ public class LoggingInterceptor implements ClientHttpRequestInterceptor {
             }
 
             @Override
-            public int getRawStatusCode() throws IOException {
-                return response.getRawStatusCode();
-            }
-
-            @Override
             public String getStatusText() throws IOException {
                 return response.getStatusText();
             }
@@ -135,7 +128,7 @@ public class LoggingInterceptor implements ClientHttpRequestInterceptor {
         };
     }
 
-    private static void printHeaders(PrintWriter out, Map<String, List<String>> headers) {
+    private static void printHeaders(PrintWriter out, HttpHeaders headers) {
         headers.forEach((name, values) -> values.forEach(value -> out.println(name + ": " + value)));
     }
 

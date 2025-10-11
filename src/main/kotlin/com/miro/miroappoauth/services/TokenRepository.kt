@@ -1,12 +1,12 @@
 package com.miro.miroappoauth.services
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.miro.miroappoauth.dto.AccessTokenDto
 import com.miro.miroappoauth.model.Token
 import com.miro.miroappoauth.model.TokenState
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
+import tools.jackson.databind.ObjectMapper
 import java.sql.ResultSet
 
 @Repository

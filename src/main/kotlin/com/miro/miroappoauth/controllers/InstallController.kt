@@ -2,6 +2,7 @@ package com.miro.miroappoauth.controllers
 
 import com.miro.miroappoauth.config.AppProperties
 import com.miro.miroappoauth.services.TokenService
+import com.miro.miroappoauth.utils.fromHttpRequest
 import com.miro.miroappoauth.utils.getCurrentRequest
 import jakarta.servlet.http.HttpSession
 import org.springframework.http.server.ServletServerHttpRequest
@@ -34,7 +35,7 @@ class InstallController(
         // resolve redirectUri value by current request URL, but omit query parameters
         val servletRequest = getCurrentRequest()
         val request = ServletServerHttpRequest(servletRequest)
-        val redirectUri = UriComponentsBuilder.fromHttpRequest(request)
+        val redirectUri = fromHttpRequest(request)
             .query(null)
             .toUriString()
 
@@ -44,7 +45,7 @@ class InstallController(
 //        session.setAttribute(SESSION_ATTR_MESSAGE, "Application successfully authorized")
 //        return "redirect:/#access_tokens"
 
-        val returnUrl = UriComponentsBuilder.fromHttpUrl(appProperties.miroBaseUrl)
+        val returnUrl = UriComponentsBuilder.fromUriString(appProperties.miroBaseUrl)
             .replacePath("/app-install-completed/")
             .queryParam("client_id", appProperties.clientId)
             .queryParam("team_id", accessToken.teamId)

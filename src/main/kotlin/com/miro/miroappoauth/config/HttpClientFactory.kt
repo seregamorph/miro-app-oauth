@@ -1,7 +1,7 @@
 package com.miro.miroappoauth.config
 
 import org.springframework.http.client.ClientHttpRequestFactory
-import org.springframework.http.client.OkHttp3ClientHttpRequestFactory
+import org.springframework.http.client.SimpleClientHttpRequestFactory
 
 class HttpClientFactory {
 
@@ -9,7 +9,7 @@ class HttpClientFactory {
     private val readTimeoutMillis = 60000
 
     fun defaultRequestFactory(): ClientHttpRequestFactory {
-        return OkHttp3ClientHttpRequestFactory().apply {
+        return SimpleClientHttpRequestFactory().apply {
             setConnectTimeout(connectTimeoutMillis)
             setReadTimeout(readTimeoutMillis)
         }

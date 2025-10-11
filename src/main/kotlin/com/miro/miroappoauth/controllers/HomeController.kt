@@ -1,10 +1,10 @@
 package com.miro.miroappoauth.controllers
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.miro.miroappoauth.config.AppProperties
 import com.miro.miroappoauth.model.TokenRecord
 import com.miro.miroappoauth.model.TokenState.INVALID
 import com.miro.miroappoauth.services.TokenService
+import com.miro.miroappoauth.utils.fromHttpRequest
 import com.miro.miroappoauth.utils.getCurrentRequest
 import jakarta.servlet.http.HttpSession
 import org.springframework.http.HttpHeaders
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.client.HttpClientErrorException.Unauthorized
 import org.springframework.web.util.UriComponentsBuilder
+import tools.jackson.databind.ObjectMapper
 import java.net.URI
 import java.time.OffsetDateTime
 import java.time.ZoneId
@@ -95,11 +96,11 @@ class HomeController(
         // note: we call UriComponentsBuilder.fromHttpRequest here
         // to resolve ngrok-proxied Host header
         // Alternative solution: "server.forward-headers-strategy: framework" in yaml config
-        val redirectUri = UriComponentsBuilder.fromHttpRequest(request)
+        val redirectUri = fromHttpRequest(request)
             .replacePath(ENDPOINT_INSTALL)
             .query(null)
             .build().toUri()
-        val webPluginV1 = UriComponentsBuilder.fromHttpRequest(request)
+        val webPluginV1 = fromHttpRequest(request)
             .replacePath("/webapp-sdk1/index.html").apply {
                 query(null)
                 if (appProperties.appName != null) {
@@ -108,7 +109,7 @@ class HomeController(
             }
             .build().toUri()
         // todo subpath of /webapp-sdk2
-        val webPluginV2 = UriComponentsBuilder.fromHttpRequest(request)
+        val webPluginV2 = fromHttpRequest(request)
             .replacePath("/index.html").apply { query(null) }
             .build().toUri()
 
@@ -133,18 +134,18 @@ class HomeController(
     private fun getTokenRecords(userId: Long, request: ServletServerHttpRequest): List<TokenRecord> {
         return tokenService.getTokens(userId, appProperties.clientId)
             .map { token ->
-                val checkValidUrl = UriComponentsBuilder.fromHttpRequest(request)
+                val checkValidUrl = fromHttpRequest(request)
                     .replacePath(ENDPOINT_CHECK_VALID_TOKEN)
                     .query(null)
                     .queryParam("access_token", token.accessTokenValue())
                     .build().toUri()
                 val refreshUrl = if (token.accessToken.refreshToken == null) null else
-                    UriComponentsBuilder.fromHttpRequest(request)
+                    fromHttpRequest(request)
                         .replacePath(ENDPOINT_REFRESH_TOKEN)
                         .query(null)
                         .queryParam("access_token", token.accessTokenValue())
                         .build().toUri()
-                val revokeUrl = UriComponentsBuilder.fromHttpRequest(request)
+                val revokeUrl = fromHttpRequest(request)
                     .replacePath(ENDPOINT_REVOKE_TOKEN)
                     .query(null)
                     .queryParam("access_token", token.accessTokenValue())
@@ -167,14 +168,14 @@ class HomeController(
         if (teamId == null) {
             return null
         }
-        return UriComponentsBuilder.fromHttpUrl(appProperties.miroBaseUrl)
+        return UriComponentsBuilder.fromUriString(appProperties.miroBaseUrl)
             .path("/app/settings/team/{teamId}/app-settings/{clientId}")
             .buildAndExpand(teamId, appProperties.clientId)
             .toUriString()
     }
 
     private fun getAuthorizeUrl(redirectUri: URI/*, state: String*/): String {
-        return UriComponentsBuilder.fromHttpUrl(appProperties.miroBaseUrl)
+        return UriComponentsBuilder.fromUriString(appProperties.miroBaseUrl)
             .path("/app-install")
             .queryParam("response_type", "code")
             .queryParam("client_id", appProperties.clientId)

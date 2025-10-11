@@ -1,21 +1,20 @@
 package com.miro.miroappoauth.config
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.PropertyNamingStrategies.LOWER_CAMEL_CASE
-import com.fasterxml.jackson.databind.PropertyNamingStrategies.SNAKE_CASE
-import com.fasterxml.jackson.databind.PropertyNamingStrategy
-import com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT
-import com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS
 import com.miro.miroappoauth.client.LoggingInterceptor
 import com.miro.miroappoauth.client.MiroAuthClient
 import com.miro.miroappoauth.client.MiroPublicClient
-import org.springframework.boot.web.client.RestTemplateBuilder
+import org.springframework.boot.restclient.RestTemplateBuilder
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.converter.FormHttpMessageConverter
 import org.springframework.http.converter.StringHttpMessageConverter
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
+import org.springframework.http.converter.json.JacksonJsonHttpMessageConverter
+import tools.jackson.databind.PropertyNamingStrategies.LOWER_CAMEL_CASE
+import tools.jackson.databind.PropertyNamingStrategies.SNAKE_CASE
+import tools.jackson.databind.PropertyNamingStrategy
+import tools.jackson.databind.SerializationFeature
+import tools.jackson.databind.cfg.DateTimeFeature
+import tools.jackson.databind.json.JsonMapper
 
 @Configuration
 class MiroClientConfig {
@@ -27,7 +26,7 @@ class MiroClientConfig {
             .messageConverters(
                 FormHttpMessageConverter(),
                 StringHttpMessageConverter(),
-                MappingJackson2HttpMessageConverter(clientObjectMapper(SNAKE_CASE))
+                JacksonJsonHttpMessageConverter(clientObjectMapper(SNAKE_CASE))
             )
             .interceptors(LoggingInterceptor())
             .rootUri(appProperties.miroApiBaseUrl)
@@ -41,7 +40,7 @@ class MiroClientConfig {
             .requestFactory { -> HttpClientFactory().defaultRequestFactory() }
             .messageConverters(
                 StringHttpMessageConverter(),
-                MappingJackson2HttpMessageConverter(clientObjectMapper(LOWER_CAMEL_CASE))
+                JacksonJsonHttpMessageConverter(clientObjectMapper(LOWER_CAMEL_CASE))
             )
             .interceptors(LoggingInterceptor())
             .rootUri(appProperties.miroApiBaseUrl)
@@ -49,9 +48,9 @@ class MiroClientConfig {
         return MiroPublicClient(restTemplate)
     }
 
-    private fun clientObjectMapper(propertyNamingStrategy: PropertyNamingStrategy) = Jackson2ObjectMapperBuilder()
+    private fun clientObjectMapper(propertyNamingStrategy: PropertyNamingStrategy) = JsonMapper.builder()
         .propertyNamingStrategy(propertyNamingStrategy)
-        .featuresToEnable(INDENT_OUTPUT)
-        .featuresToDisable(WRITE_DATES_AS_TIMESTAMPS)
-        .build<ObjectMapper>()
+        .enable(SerializationFeature.INDENT_OUTPUT)
+        .disable(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
+        .build()
 }
