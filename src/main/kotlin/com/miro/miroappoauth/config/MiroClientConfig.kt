@@ -22,7 +22,7 @@ class MiroClientConfig {
     @Bean
     fun miroAuthClient(appProperties: AppProperties): MiroAuthClient {
         val restTemplate = RestTemplateBuilder()
-            .requestFactory { -> HttpClientFactory().defaultRequestFactory() }
+            .requestFactory { HttpClientFactory().defaultRequestFactory() }
             .messageConverters(
                 FormHttpMessageConverter(),
                 StringHttpMessageConverter(),
@@ -37,7 +37,7 @@ class MiroClientConfig {
     @Bean
     fun miroPublicClient(appProperties: AppProperties): MiroPublicClient {
         val restTemplate = RestTemplateBuilder()
-            .requestFactory { -> HttpClientFactory().defaultRequestFactory() }
+            .requestFactory { HttpClientFactory().defaultRequestFactory() }
             .messageConverters(
                 StringHttpMessageConverter(),
                 JacksonJsonHttpMessageConverter(clientObjectMapper(LOWER_CAMEL_CASE))
