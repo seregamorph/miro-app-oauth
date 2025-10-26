@@ -98,11 +98,11 @@ class HomeController(
         // Alternative solution: "server.forward-headers-strategy: framework" in yaml config
         val redirectUri = fromHttpRequest(request)
             .replacePath(ENDPOINT_INSTALL)
-            .query(null)
+            .replaceQuery(null)
             .build().toUri()
         val webPluginV1 = fromHttpRequest(request)
             .replacePath("/webapp-sdk1/index.html").apply {
-                query(null)
+                replaceQuery(null)
                 if (appProperties.appName != null) {
                     queryParam("appName", appProperties.appName)
                 }
@@ -110,7 +110,8 @@ class HomeController(
             .build().toUri()
         // todo subpath of /webapp-sdk2
         val webPluginV2 = fromHttpRequest(request)
-            .replacePath("/index.html").apply { query(null) }
+            .replacePath("/index.html")
+            .replaceQuery(null)
             .build().toUri()
 
         val referer = servletRequest.getHeader(HttpHeaders.REFERER)
@@ -136,18 +137,18 @@ class HomeController(
             .map { token ->
                 val checkValidUrl = fromHttpRequest(request)
                     .replacePath(ENDPOINT_CHECK_VALID_TOKEN)
-                    .query(null)
+                    .replaceQuery(null)
                     .queryParam("access_token", token.accessTokenValue())
                     .build().toUri()
                 val refreshUrl = if (token.accessToken.refreshToken == null) null else
                     fromHttpRequest(request)
                         .replacePath(ENDPOINT_REFRESH_TOKEN)
-                        .query(null)
+                        .replaceQuery(null)
                         .queryParam("access_token", token.accessTokenValue())
                         .build().toUri()
                 val revokeUrl = fromHttpRequest(request)
                     .replacePath(ENDPOINT_REVOKE_TOKEN)
-                    .query(null)
+                    .replaceQuery(null)
                     .queryParam("access_token", token.accessTokenValue())
                     .build().toUri()
                 TokenRecord(

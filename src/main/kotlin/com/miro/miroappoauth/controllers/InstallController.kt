@@ -36,7 +36,7 @@ class InstallController(
         val servletRequest = getCurrentRequest()
         val request = ServletServerHttpRequest(servletRequest)
         val redirectUri = fromHttpRequest(request)
-            .query(null)
+            .replaceQuery(null)
             .toUriString()
 
         val accessToken = tokenService.getAccessToken(code, redirectUri, appProperties.clientId)
