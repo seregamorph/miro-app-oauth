@@ -33,10 +33,11 @@ spring.h2.console:
 
 management.server:
   port: 8088
+# note: exposes "app.clientSecret" in http://localhost:8088/manage/env
+management.endpoint.env:
+  show-values: always
+management.endpoints.jackson:
+  isolated-json-mapper: false
 management.endpoints.web:
   exposure.include: "*"
   base-path: /manage
-management.endpoints.jackson:
-  isolated-object-mapper: false
-
-
