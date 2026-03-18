@@ -16,7 +16,7 @@ import tools.jackson.databind.SerializationFeature
 import tools.jackson.databind.cfg.DateTimeFeature
 import tools.jackson.databind.json.JsonMapper
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 class MiroClientConfig {
 
     @Bean
