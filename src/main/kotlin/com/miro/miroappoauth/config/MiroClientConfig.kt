@@ -5,7 +5,6 @@ import com.miro.miroappoauth.client.MiroAuthClient
 import com.miro.miroappoauth.client.MiroPublicClient
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.http.converter.FormHttpMessageConverter
 import org.springframework.http.converter.StringHttpMessageConverter
 import org.springframework.http.converter.json.JacksonJsonHttpMessageConverter
 import org.springframework.web.client.RestClient
@@ -23,13 +22,11 @@ class MiroClientConfig {
     fun miroAuthClient(appProperties: AppProperties): MiroAuthClient {
         val restTemplate = RestClient.builder()
             .requestFactory(HttpClientFactory().defaultRequestFactory())
-            .messageConverters(
-                listOf(
-                    FormHttpMessageConverter(),
-                    StringHttpMessageConverter(),
-                    JacksonJsonHttpMessageConverter(clientObjectMapper(SNAKE_CASE))
-                )
-            )
+            .configureMessageConverters { builder ->
+                builder.registerDefaults()
+                    .withStringConverter(StringHttpMessageConverter())
+                    .withJsonConverter(JacksonJsonHttpMessageConverter(clientObjectMapper(SNAKE_CASE)))
+            }
             .requestInterceptor(LoggingInterceptor())
             .baseUrl(appProperties.miroApiBaseUrl)
             .build()
@@ -40,12 +37,11 @@ class MiroClientConfig {
     fun miroPublicClient(appProperties: AppProperties): MiroPublicClient {
         val restTemplate = RestClient.builder()
             .requestFactory(HttpClientFactory().defaultRequestFactory())
-            .messageConverters(
-                listOf(
-                    StringHttpMessageConverter(),
-                    JacksonJsonHttpMessageConverter(clientObjectMapper(LOWER_CAMEL_CASE))
-                )
-            )
+            .configureMessageConverters { builder ->
+                builder.registerDefaults()
+                    .withStringConverter(StringHttpMessageConverter())
+                    .withJsonConverter(JacksonJsonHttpMessageConverter(clientObjectMapper(LOWER_CAMEL_CASE)))
+            }
             .requestInterceptor(LoggingInterceptor())
             .baseUrl(appProperties.miroApiBaseUrl)
             .build()
